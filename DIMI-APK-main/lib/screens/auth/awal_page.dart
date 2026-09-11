@@ -1,7 +1,6 @@
 import 'dart:async';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; //baruu
 import 'selamat_datang_page.dart'; // sesuaikan dengan path file kamu
-
 
 class AwalPage extends StatefulWidget {
   const AwalPage({super.key});
