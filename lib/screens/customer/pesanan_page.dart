@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'beranda_page.dart';
+import 'menu_page.dart';
+import 'profile_page.dart';
+import 'cart_page.dart';
 
 class PesananPage extends StatefulWidget {
   const PesananPage({super.key});
@@ -72,6 +76,10 @@ class _PesananPageState extends State<PesananPage> with SingleTickerProviderStat
             icon: const Icon(Icons.shopping_cart_outlined, color: Colors.black87),
             onPressed: () {
               // TODO: Navigator ke cart_page
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const CartPage()),
+              );
             },
           ),
           const SizedBox(width: 8),
@@ -107,6 +115,15 @@ class _PesananPageState extends State<PesananPage> with SingleTickerProviderStat
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
           // TODO: navigasi antar tab
+          if (index == 0) {
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const BerandaPage()));
+          } else if (index == 1) {
+            // Tetap di halaman pesanan
+          } else if (index == 2) {
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const MenuPage()));
+          } else if (index == 3) {
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ProfilePage()));
+          }
         },
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Beranda'),

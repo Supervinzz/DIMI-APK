@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
+import 'package:dimi/screens/customer/cart_page.dart';
+import 'package:dimi/screens/customer/menu_page.dart';
+import 'package:dimi/screens/customer/profile_page.dart';
+import 'package:dimi/screens/customer/pesanan_page.dart';
+import 'package:dimi/screens/customer/detail_produk_dimsumfrozen.dart';
 
 class BerandaPage extends StatelessWidget {
   const BerandaPage({super.key});
@@ -12,15 +18,23 @@ class BerandaPage extends StatelessWidget {
         elevation: 0,
         title: const Text(
           'Dimi',
-          style: TextStyle(color: Color(0xFFE08A33), fontSize: 24, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              color: Color(0xFFE08A33),
+              fontSize: 24,
+              fontWeight: FontWeight.bold),
         ),
         actions: [
           Stack(
             children: [
               IconButton(
-                icon: const Icon(Icons.shopping_cart_outlined, color: Colors.black87),
+                icon: const Icon(Icons.shopping_cart_outlined,
+                    color: Colors.black87),
                 onPressed: () {
                   // TODO: Navigator ke cart_page
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const CartPage()),
+                  );
                 },
               ),
               Positioned(
@@ -28,8 +42,10 @@ class BerandaPage extends StatelessWidget {
                 top: 8,
                 child: Container(
                   padding: const EdgeInsets.all(3),
-                  decoration: const BoxDecoration(color: Colors.red, shape: BoxShape.circle),
-                  child: const Text('1', style: TextStyle(color: Colors.white, fontSize: 9)),
+                  decoration: const BoxDecoration(
+                      color: Colors.red, shape: BoxShape.circle),
+                  child: const Text('1',
+                      style: TextStyle(color: Colors.white, fontSize: 9)),
                 ),
               ),
             ],
@@ -99,11 +115,20 @@ class BerandaPage extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 children: const [
-                  _MenuCard(name: 'Single Moza', subtitle: 'Lumer di mulut', price: 'Rp 28k'),
+                  _MenuCard(
+                      name: 'Single Moza',
+                      subtitle: 'Lumer di mulut',
+                      price: 'Rp 28k'),
                   SizedBox(width: 12),
-                  _MenuCard(name: 'Dimsum Frozen', subtitle: 'Isi 20 pcs', price: 'Rp 90k'),
+                  _MenuCard(
+                      name: 'Dimsum Frozen',
+                      subtitle: 'Isi 20 pcs',
+                      price: 'Rp 90k'),
                   SizedBox(width: 12),
-                  _MenuCard(name: 'Dimsum Frozen', subtitle: 'Isi 20 pcs', price: 'Rp 90k'),
+                  _MenuCard(
+                      name: 'Dimsum Frozen',
+                      subtitle: 'Isi 20 pcs',
+                      price: 'Rp 90k'),
                 ],
               ),
             ),
@@ -140,12 +165,33 @@ class BerandaPage extends StatelessWidget {
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
           // TODO: navigasi antar tab (Pesanan, Menu, Profil)
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                switch (index) {
+                  case 1:
+                    return const PesananPage();
+                  case 2:
+                    return const MenuPage();
+                  case 3:
+                    return const ProfilePage();
+                  default:
+                    return const BerandaPage();
+                }
+              },
+            ),
+          );
         },
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Beranda'),
-          BottomNavigationBarItem(icon: Icon(Icons.receipt_long_outlined), label: 'Pesanan'),
-          BottomNavigationBarItem(icon: Icon(Icons.restaurant_menu_outlined), label: 'Menu'),
-          BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: 'Profil'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home_outlined), label: 'Beranda'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.receipt_long_outlined), label: 'Pesanan'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.restaurant_menu_outlined), label: 'Menu'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.person_outline), label: 'Profil'),
         ],
       ),
     );
@@ -157,8 +203,11 @@ class BerandaPage extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-          const Text('Lihat semua', style: TextStyle(fontSize: 12, color: Color(0xFFE08A33))),
+          Text(title,
+              style:
+                  const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          const Text('Lihat semua',
+              style: TextStyle(fontSize: 12, color: Color(0xFFE08A33))),
         ],
       ),
     );
@@ -184,7 +233,12 @@ class _DiscountCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(14),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.06), blurRadius: 8, offset: const Offset(0, 2))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.06),
+              blurRadius: 8,
+              offset: const Offset(0, 2))
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -192,16 +246,23 @@ class _DiscountCard extends StatelessWidget {
           Stack(
             children: [
               ClipRRect(
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(14)),
-                child: Image.asset('assets/images/produk1.jpg', height: 100, width: double.infinity, fit: BoxFit.cover),
+                borderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(14)),
+                child: Image.asset('assets/images/produk1.jpg',
+                    height: 100, width: double.infinity, fit: BoxFit.cover),
               ),
               Positioned(
                 top: 8,
                 left: 8,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                  decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(6)),
-                  child: Text(discountLabel, style: const TextStyle(color: Colors.white, fontSize: 10)),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(6)),
+                  child: Text(discountLabel,
+                      style:
+                          const TextStyle(color: Colors.white, fontSize: 10)),
                 ),
               ),
             ],
@@ -211,18 +272,32 @@ class _DiscountCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(name, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-                Text(subtitle, style: const TextStyle(fontSize: 11, color: Colors.black45)),
+                Text(name,
+                    style: const TextStyle(
+                        fontSize: 13, fontWeight: FontWeight.w600)),
+                Text(subtitle,
+                    style:
+                        const TextStyle(fontSize: 11, color: Colors.black45)),
                 const SizedBox(height: 6),
-                Text(originalPrice, style: const TextStyle(fontSize: 11, color: Colors.black38, decoration: TextDecoration.lineThrough)),
+                Text(originalPrice,
+                    style: const TextStyle(
+                        fontSize: 11,
+                        color: Colors.black38,
+                        decoration: TextDecoration.lineThrough)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(discountPrice, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Color(0xFFE08A33))),
+                    Text(discountPrice,
+                        style: const TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFFE08A33))),
                     Container(
                       padding: const EdgeInsets.all(4),
-                      decoration: const BoxDecoration(color: Color(0xFFE08A33), shape: BoxShape.circle),
-                      child: const Icon(Icons.add, color: Colors.white, size: 14),
+                      decoration: const BoxDecoration(
+                          color: Color(0xFFE08A33), shape: BoxShape.circle),
+                      child:
+                          const Icon(Icons.add, color: Colors.white, size: 14),
                     ),
                   ],
                 ),
@@ -239,7 +314,8 @@ class _DiscountCard extends StatelessWidget {
 class _MenuCard extends StatelessWidget {
   final String name, subtitle, price;
 
-  const _MenuCard({required this.name, required this.subtitle, required this.price});
+  const _MenuCard(
+      {required this.name, required this.subtitle, required this.price});
 
   @override
   Widget build(BuildContext context) {
@@ -248,31 +324,48 @@ class _MenuCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(14),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.06), blurRadius: 8, offset: const Offset(0, 2))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.06),
+              blurRadius: 8,
+              offset: const Offset(0, 2))
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipRRect(
             borderRadius: const BorderRadius.vertical(top: Radius.circular(14)),
-            child: Image.asset('assets/images/produk2.jpg', height: 90, width: double.infinity, fit: BoxFit.cover),
+            child: Image.asset('assets/images/produk2.jpg',
+                height: 90, width: double.infinity, fit: BoxFit.cover),
           ),
           Padding(
             padding: const EdgeInsets.all(8),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(name, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600)),
-                Text(subtitle, style: const TextStyle(fontSize: 10, color: Colors.black45)),
+                Text(name,
+                    style: const TextStyle(
+                        fontSize: 12, fontWeight: FontWeight.w600)),
+                Text(subtitle,
+                    style:
+                        const TextStyle(fontSize: 10, color: Colors.black45)),
                 const SizedBox(height: 4),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(price, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFFE08A33))),
+                    Text(price,
+                        style: const TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFFE08A33))),
                     Container(
                       padding: const EdgeInsets.all(3),
-                      decoration: BoxDecoration(border: Border.all(color: const Color(0xFFE08A33)), shape: BoxShape.circle),
-                      child: const Icon(Icons.add, color: Color(0xFFE08A33), size: 12),
+                      decoration: BoxDecoration(
+                          border: Border.all(color: const Color(0xFFE08A33)),
+                          shape: BoxShape.circle),
+                      child: const Icon(Icons.add,
+                          color: Color(0xFFE08A33), size: 12),
                     ),
                   ],
                 ),
@@ -296,6 +389,20 @@ class _CategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              if (isMore) {
+                return const MenuPage();
+              } else if (label == 'Dimsum') {
+                return const DetailProdukFrozenPage();
+              } else {
+                return const MenuPage();
+              }
+            },
+          ),
+        );
         // TODO: Navigator ke menu_page dengan filter kategori
       },
       child: Container(
@@ -304,13 +411,17 @@ class _CategoryCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           image: isMore
               ? null
-              : const DecorationImage(image: AssetImage('assets/images/kategori_default.jpg'), fit: BoxFit.cover),
+              : const DecorationImage(
+                  image: AssetImage('assets/images/kategori_default.jpg'),
+                  fit: BoxFit.cover),
         ),
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
             if (isMore)
-              const Center(child: Icon(Icons.grid_view_rounded, color: Color(0xFFE08A33), size: 28))
+              const Center(
+                  child: Icon(Icons.grid_view_rounded,
+                      color: Color(0xFFE08A33), size: 28))
             else
               Container(
                 decoration: BoxDecoration(

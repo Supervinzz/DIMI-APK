@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'alamat_pengiriman_peta.dart';
+import 'tambah_alamat.dart';
 
 class AlamatTersimpan {
   final String label;
@@ -111,6 +113,12 @@ class _AlamatPengirimanListPageState extends State<AlamatPengirimanListPage> {
                       subtitle: 'Tentukan lokasi dengan\nmemilih di peta',
                       onTap: () {
                         // TODO: navigasi ke halaman pilih lokasi di peta
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AlamatPengirimanPetaPage(),
+                          ),
+                        );
                       },
                     ),
                     const SizedBox(height: 12),
@@ -122,6 +130,12 @@ class _AlamatPengirimanListPageState extends State<AlamatPengirimanListPage> {
                       subtitle: 'Tambahkan alamat\npengiriman baru',
                       onTap: () {
                         // TODO: navigasi ke halaman tambah alamat baru
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const TambahAlamatBaruPage(),
+                          ),
+                        );
                       },
                     ),
                     const SizedBox(height: 16),

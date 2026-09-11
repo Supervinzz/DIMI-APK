@@ -9,7 +9,6 @@ class DetailProdukPage extends StatefulWidget {
 
 class _DetailProdukPageState extends State<DetailProdukPage> {
   static const Color kOrange = Color(0xFFF5821F);
-  static const Color kOrangeLight = Color(0xFFFDEFE1);
 
   final TextEditingController _catatanController = TextEditingController();
 
@@ -156,7 +155,8 @@ class _DetailProdukPageState extends State<DetailProdukPage> {
                     ],
                   ),
                   child: IconButton(
-                    icon: const Icon(Icons.arrow_back, color: Colors.black87, size: 20),
+                    icon: const Icon(Icons.arrow_back,
+                        color: Colors.black87, size: 20),
                     onPressed: () => Navigator.of(context).maybePop(),
                   ),
                 ),
@@ -243,8 +243,7 @@ class _DetailProdukPageState extends State<DetailProdukPage> {
           ],
         ),
         const SizedBox(height: 10),
-        for (int i = 0; i < _pilihanSaus.length; i++)
-          _buildSausOption(i),
+        for (int i = 0; i < _pilihanSaus.length; i++) _buildSausOption(i),
       ],
     );
   }

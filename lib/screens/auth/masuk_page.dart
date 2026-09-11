@@ -1,5 +1,6 @@
 import 'package:dimi/screens/auth/buat_akun_page.dart';
 import 'package:dimi/screens/auth/lupa_password_page.dart';
+import 'package:dimi/screens/customer/beranda_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
@@ -177,6 +178,11 @@ class _MasukPageState extends State<MasukPage> {
                       child: ElevatedButton(
                         onPressed: () {
                           // TODO: proses login, lalu arahkan ke halaman utama
+                          
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => const BerandaPage()),
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFFE08A33),

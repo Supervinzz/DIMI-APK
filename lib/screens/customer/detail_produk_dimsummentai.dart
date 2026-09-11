@@ -4,13 +4,11 @@ class DetailProdukMentaiPage extends StatefulWidget {
   const DetailProdukMentaiPage({super.key});
 
   @override
-  State<DetailProdukMentaiPage> createState() =>
-      _DetailProdukMentaiPageState();
+  State<DetailProdukMentaiPage> createState() => _DetailProdukMentaiPageState();
 }
 
 class _DetailProdukMentaiPageState extends State<DetailProdukMentaiPage> {
   static const Color kOrange = Color(0xFFF5821F);
-  static const Color kOrangeLight = Color(0xFFFDEFE1);
 
   final TextEditingController _catatanController = TextEditingController();
 

@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:dimi/screens/customer/tentang_dimi.dart';
+import 'package:dimi/screens/customer/keamanan_akun_page.dart';
+import 'package:dimi/screens/customer/pembayaran_qris_page.dart';
+import 'package:dimi/screens/customer/alamat_pengiriman_utama.dart';
+import 'package:dimi/screens/customer/beranda_page.dart';
+import 'package:dimi/screens/customer/pesanan_page.dart';
+import 'package:dimi/screens/customer/menu_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -13,7 +20,10 @@ class ProfilePage extends StatelessWidget {
         automaticallyImplyLeading: false,
         title: const Text(
           'Dimi',
-          style: TextStyle(color: Color(0xFFE08A33), fontSize: 22, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              color: Color(0xFFE08A33),
+              fontSize: 22,
+              fontWeight: FontWeight.bold),
         ),
       ),
       body: SingleChildScrollView(
@@ -26,23 +36,30 @@ class ProfilePage extends StatelessWidget {
               children: [
                 const CircleAvatar(
                   radius: 30,
-                  backgroundImage: AssetImage('assets/images/avatar_default.jpg'),
+                  backgroundImage:
+                      AssetImage('assets/images/avatar_default.jpg'),
                 ),
                 const SizedBox(width: 14),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
-                      Text('Dimi User', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                      Text('Dimi User',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold)),
                       SizedBox(height: 2),
-                      Text('0812 •••• 5678', style: TextStyle(fontSize: 13, color: Colors.black54)),
+                      Text('0812 •••• 5678',
+                          style:
+                              TextStyle(fontSize: 13, color: Colors.black54)),
                     ],
                   ),
                 ),
                 Container(
                   padding: const EdgeInsets.all(8),
-                  decoration: const BoxDecoration(color: Color(0xFFFDF0E6), shape: BoxShape.circle),
-                  child: const Icon(Icons.edit_outlined, color: Color(0xFFE08A33), size: 18),
+                  decoration: const BoxDecoration(
+                      color: Color(0xFFFDF0E6), shape: BoxShape.circle),
+                  child: const Icon(Icons.edit_outlined,
+                      color: Color(0xFFE08A33), size: 18),
                 ),
               ],
             ),
@@ -52,12 +69,16 @@ class ProfilePage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Pesanan Saya', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                const Text('Pesanan Saya',
+                    style:
+                        TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
                 TextButton(
                   onPressed: () {
                     // TODO: Navigator ke pesanan_page (lihat semua)
+                    Navigator.pushNamed(context, '/pesanan');
                   },
-                  child: const Text('Lihat Semua >', style: TextStyle(fontSize: 12, color: Colors.black45)),
+                  child: const Text('Lihat Semua >',
+                      style: TextStyle(fontSize: 12, color: Colors.black45)),
                 ),
               ],
             ),
@@ -65,10 +86,16 @@ class ProfilePage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _OrderStatusItem(icon: Icons.receipt_long_outlined, label: 'Belum Bayar', badgeCount: 1),
-                _OrderStatusItem(icon: Icons.inventory_2_outlined, label: 'Diproses'),
-                _OrderStatusItem(icon: Icons.local_shipping_outlined, label: 'Dikirim'),
-                _OrderStatusItem(icon: Icons.check_circle_outline, label: 'Selesai'),
+                _OrderStatusItem(
+                    icon: Icons.receipt_long_outlined,
+                    label: 'Belum Bayar',
+                    badgeCount: 1),
+                _OrderStatusItem(
+                    icon: Icons.inventory_2_outlined, label: 'Diproses'),
+                _OrderStatusItem(
+                    icon: Icons.local_shipping_outlined, label: 'Dikirim'),
+                _OrderStatusItem(
+                    icon: Icons.check_circle_outline, label: 'Selesai'),
               ],
             ),
             const SizedBox(height: 24),
@@ -80,6 +107,11 @@ class ProfilePage extends StatelessWidget {
               label: 'Alamat Pengiriman',
               onTap: () {
                 // TODO: Navigator ke halaman alamat
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AlamatPengirimanListPage()),
+                );
               },
             ),
             _ProfileMenuItem(
@@ -87,6 +119,11 @@ class ProfilePage extends StatelessWidget {
               label: 'Pembayaran',
               onTap: () {
                 // TODO: Navigator ke payment_page
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const PembayaranQrisPage()),
+                );
               },
             ),
             _ProfileMenuItem(
@@ -94,6 +131,11 @@ class ProfilePage extends StatelessWidget {
               label: 'Keamanan Akun',
               onTap: () {
                 // TODO: Navigator ke keamanan_akun_page
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const KeamananAkunPage()),
+                );
               },
             ),
             const SizedBox(height: 20),
@@ -106,6 +148,25 @@ class ProfilePage extends StatelessWidget {
               trailingText: 'Terang',
               onTap: () {
                 // TODO: buka dialog pilih tema (light/dark)
+                showDialog<void>(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text('Pilih Tema'),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ListTile(
+                          title: const Text('Terang'),
+                          onTap: () => Navigator.pop(context),
+                        ),
+                        ListTile(
+                          title: const Text('Gelap'),
+                          onTap: () => Navigator.pop(context),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
               },
             ),
             _ProfileMenuItem(
@@ -113,6 +174,11 @@ class ProfilePage extends StatelessWidget {
               label: 'Tentang Dimi',
               onTap: () {
                 // TODO: Navigator ke halaman tentang
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const TentangDimiPage()),
+                );
               },
             ),
             const SizedBox(height: 12),
@@ -121,6 +187,11 @@ class ProfilePage extends StatelessWidget {
             InkWell(
               onTap: () {
                 // TODO: proses logout
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  'masuk',
+                  (route) => false,
+                );
               },
               child: const Padding(
                 padding: EdgeInsets.symmetric(vertical: 12),
@@ -128,7 +199,11 @@ class ProfilePage extends StatelessWidget {
                   children: [
                     Icon(Icons.logout, color: Color(0xFFE08A33), size: 20),
                     SizedBox(width: 12),
-                    Text('Keluar', style: TextStyle(color: Color(0xFFE08A33), fontWeight: FontWeight.w600, fontSize: 14)),
+                    Text('Keluar',
+                        style: TextStyle(
+                            color: Color(0xFFE08A33),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14)),
                   ],
                 ),
               ),
@@ -143,12 +218,33 @@ class ProfilePage extends StatelessWidget {
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
           // TODO: navigasi antar tab
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                switch (index) {
+                  case 0:
+                    return const BerandaPage();
+                  case 1:
+                    return const PesananPage();
+                  case 2:
+                    return const MenuPage();
+                  default:
+                    return const ProfilePage();
+                }
+              },
+            ),
+          );
         },
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Beranda'),
-          BottomNavigationBarItem(icon: Icon(Icons.receipt_long_outlined), label: 'Pesanan'),
-          BottomNavigationBarItem(icon: Icon(Icons.restaurant_menu_outlined), label: 'Menu'),
-          BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: 'Profil'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home_outlined), label: 'Beranda'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.receipt_long_outlined), label: 'Pesanan'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.restaurant_menu_outlined), label: 'Menu'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.person_outline), label: 'Profil'),
         ],
       ),
     );
@@ -157,7 +253,8 @@ class ProfilePage extends StatelessWidget {
   Widget _sectionLabel(String text) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
-      child: Text(text, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+      child: Text(text,
+          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
     );
   }
 }
@@ -168,7 +265,8 @@ class _OrderStatusItem extends StatelessWidget {
   final String label;
   final int? badgeCount;
 
-  const _OrderStatusItem({required this.icon, required this.label, this.badgeCount});
+  const _OrderStatusItem(
+      {required this.icon, required this.label, this.badgeCount});
 
   @override
   Widget build(BuildContext context) {
@@ -179,7 +277,8 @@ class _OrderStatusItem extends StatelessWidget {
           children: [
             Container(
               padding: const EdgeInsets.all(12),
-              decoration: const BoxDecoration(color: Color(0xFFFDF0E6), shape: BoxShape.circle),
+              decoration: const BoxDecoration(
+                  color: Color(0xFFFDF0E6), shape: BoxShape.circle),
               child: Icon(icon, color: const Color(0xFFE08A33), size: 22),
             ),
             if (badgeCount != null)
@@ -188,14 +287,17 @@ class _OrderStatusItem extends StatelessWidget {
                 top: -2,
                 child: Container(
                   padding: const EdgeInsets.all(3),
-                  decoration: const BoxDecoration(color: Colors.red, shape: BoxShape.circle),
-                  child: Text('$badgeCount', style: const TextStyle(color: Colors.white, fontSize: 9)),
+                  decoration: const BoxDecoration(
+                      color: Colors.red, shape: BoxShape.circle),
+                  child: Text('$badgeCount',
+                      style: const TextStyle(color: Colors.white, fontSize: 9)),
                 ),
               ),
           ],
         ),
         const SizedBox(height: 6),
-        Text(label, style: const TextStyle(fontSize: 11, color: Colors.black54)),
+        Text(label,
+            style: const TextStyle(fontSize: 11, color: Colors.black54)),
       ],
     );
   }
@@ -225,9 +327,13 @@ class _ProfileMenuItem extends StatelessWidget {
           children: [
             Icon(icon, color: Colors.black54, size: 20),
             const SizedBox(width: 14),
-            Expanded(child: Text(label, style: const TextStyle(fontSize: 14, color: Colors.black87))),
+            Expanded(
+                child: Text(label,
+                    style:
+                        const TextStyle(fontSize: 14, color: Colors.black87))),
             if (trailingText != null) ...[
-              Text(trailingText!, style: const TextStyle(fontSize: 12, color: Colors.black38)),
+              Text(trailingText!,
+                  style: const TextStyle(fontSize: 12, color: Colors.black38)),
               const SizedBox(width: 4),
             ],
             const Icon(Icons.chevron_right, color: Colors.black26, size: 18),

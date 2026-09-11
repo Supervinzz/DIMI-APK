@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class AlamatPengirimanPage extends StatelessWidget {
-  const AlamatPengirimanPage({super.key});
+class AlamatPengirimanPetaPage extends StatelessWidget {
+  const AlamatPengirimanPetaPage({super.key});
 
   static const Color kOrange = Color(0xFFF5821F);
 

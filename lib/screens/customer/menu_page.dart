@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'beranda_page.dart';
+import 'pesanan_page.dart';
+import 'profile_page.dart';
+import 'cart_page.dart';
 
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
@@ -22,6 +26,7 @@ class _MenuPageState extends State<MenuPage> {
       'price': 'Rp28.000',
       'discount': '-10%',
       'image': 'produk1.jpg',
+      'category': 'Dimsum',
     },
     {
       'name': 'Single Moza',
@@ -32,6 +37,7 @@ class _MenuPageState extends State<MenuPage> {
       'price': 'Rp33.000',
       'discount': null,
       'image': 'produk2.jpg',
+      'category': 'Dimsum',
     },
     {
       'name': 'Platter Mentai',
@@ -42,6 +48,7 @@ class _MenuPageState extends State<MenuPage> {
       'price': 'Rp100.000',
       'discount': '-15%',
       'image': 'produk3.jpg',
+      'category': 'Dimsum',
     },
     {
       'name': 'Dimsum Frozen',
@@ -52,6 +59,7 @@ class _MenuPageState extends State<MenuPage> {
       'price': 'Rp30.000',
       'discount': null,
       'image': 'produk4.jpg',
+      'category': 'Dimsum',
     },
     {
       'name': 'Siomay',
@@ -62,6 +70,7 @@ class _MenuPageState extends State<MenuPage> {
       'price': 'Rp25.000',
       'discount': null,
       'image': 'produk5.jpg',
+      'category': 'Siomay',
     },
     {
       'name': 'Cilok',
@@ -72,6 +81,7 @@ class _MenuPageState extends State<MenuPage> {
       'price': 'Rp15.000',
       'discount': null,
       'image': 'produk6.jpg',
+      'category': 'Cilok',
     },
     {
       'name': 'Tahu Aci',
@@ -82,6 +92,7 @@ class _MenuPageState extends State<MenuPage> {
       'price': 'Rp18.000',
       'discount': null,
       'image': 'produk7.jpg',
+      'category': 'Lainnya',
     },
     {
       'name': 'Frozen Dimsum',
@@ -92,8 +103,102 @@ class _MenuPageState extends State<MenuPage> {
       'price': 'Rp30.000',
       'discount': null,
       'image': 'produk8.jpg',
+      'category': 'Dimsum',
+    },
+    {
+      'name': 'Dimsum Original',
+      'subtitle': 'Dimsum klasik gurih',
+      'rating': '4.8',
+      'sold': '200 terjual',
+      'originalPrice': null,
+      'price': 'Rp3.000/pcs',
+      'discount': null,
+      'image': 'produk9.jpg',
+      'category': 'Dimsum',
+    },
+    {
+      'name': 'Dimsum Chili Oil',
+      'subtitle': 'Pedas mantap chili oil',
+      'rating': '4.9',
+      'sold': '110 terjual',
+      'originalPrice': null,
+      'price': 'Rp24.000',
+      'discount': null,
+      'image': 'produk10.jpg',
+      'category': 'Dimsum',
+    },
+    {
+      'name': 'Dimsum Keju',
+      'subtitle': 'Saus keju melimpah',
+      'rating': '4.8',
+      'sold': '95 terjual',
+      'originalPrice': null,
+      'price': 'Rp24.000',
+      'discount': null,
+      'image': 'produk11.jpg',
+      'category': 'Dimsum',
+    },
+    {
+      'name': 'Siomay Lengkap',
+      'subtitle': 'Siomay paket komplit',
+      'rating': '4.8',
+      'sold': '160 terjual',
+      'originalPrice': null,
+      'price': 'Rp12.000',
+      'discount': null,
+      'image': 'produk12.jpg',
+      'category': 'Siomay',
+    },
+    {
+      'name': 'Cilok Kuah Pedas',
+      'subtitle': 'Cilok dengan kuah pedas',
+      'rating': '4.9',
+      'sold': '110 terjual',
+      'originalPrice': null,
+      'price': 'Rp5–10.000',
+      'discount': null,
+      'image': 'produk13.jpg',
+      'category': 'Cilok',
+    },
+    {
+      'name': 'Cilok Kuah Bakso',
+      'subtitle': 'Cilok dengan kuah bakso',
+      'rating': '4.8',
+      'sold': '85 terjual',
+      'originalPrice': null,
+      'price': 'Rp5–10.000',
+      'discount': null,
+      'image': 'produk14.jpg',
+      'category': 'Cilok',
+    },
+    {
+      'name': 'Tahu sambal kacang',
+      'subtitle': 'Tahu aci gurih renyah',
+      'rating': '4.8',
+      'sold': '90 terjual',
+      'originalPrice': null,
+      'price': 'Rp5–10.000',
+      'discount': '-10%',
+      'image': 'produk15.jpg',
+      'category': 'Lainnya',
+    },
+    {
+      'name': 'Siomay beku siap saji',
+      'subtitle': 'Siomay beku siap saji',
+      'rating': '4.7',
+      'sold': '65 terjual',
+      'originalPrice': null,
+      'price': 'Rp5–10.000',
+      'discount': null,
+      'image': 'produk16.jpg',
+      'category': 'Siomay',
     },
   ];
+
+  List<Map<String, dynamic>> get _filteredProducts {
+    if (_selectedCategory == 'Semua') return _products;
+    return _products.where((p) => p['category'] == _selectedCategory).toList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,12 +208,33 @@ class _MenuPageState extends State<MenuPage> {
         backgroundColor: Colors.white,
         elevation: 0,
         automaticallyImplyLeading: false,
+        title: const Text(
+          'Dimi',
+          style: TextStyle(color: Color(0xFFE08A33), fontSize: 22, fontWeight: FontWeight.bold),
+        ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.shopping_cart_outlined, color: Colors.black87),
-            onPressed: () {
-              // TODO: Navigator ke cart_page
-            },
+          Stack(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.shopping_cart_outlined, color: Colors.black87),
+                onPressed: () {
+                  // TODO: Navigator ke cart_page
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const CartPage()),
+                  );
+                },
+              ),
+              Positioned(
+                right: 8,
+                top: 8,
+                child: Container(
+                  padding: const EdgeInsets.all(3),
+                  decoration: const BoxDecoration(color: Colors.red, shape: BoxShape.circle),
+                  child: const Text('2', style: TextStyle(color: Colors.white, fontSize: 9)),
+                ),
+              ),
+            ],
           ),
           const SizedBox(width: 8),
         ],
@@ -178,13 +304,13 @@ class _MenuPageState extends State<MenuPage> {
             ),
             const SizedBox(height: 16),
 
-            // Grid produk
+            // Grid produk (sekarang pakai _filteredProducts, bukan _products)
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: GridView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: _products.length,
+                itemCount: _filteredProducts.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   mainAxisSpacing: 14,
@@ -192,7 +318,7 @@ class _MenuPageState extends State<MenuPage> {
                   childAspectRatio: 0.68,
                 ),
                 itemBuilder: (context, index) {
-                  final p = _products[index];
+                  final p = _filteredProducts[index];
                   return _ProductCard(
                     name: p['name'],
                     subtitle: p['subtitle'],
@@ -207,6 +333,10 @@ class _MenuPageState extends State<MenuPage> {
                     },
                     onAdd: () {
                       // TODO: tambah ke cart
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const CartPage()),
+                      );
                     },
                   );
                 },
@@ -214,6 +344,30 @@ class _MenuPageState extends State<MenuPage> {
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 2,
+        selectedItemColor: const Color(0xFFE08A33),
+        unselectedItemColor: Colors.black38,
+        type: BottomNavigationBarType.fixed,
+        onTap: (index) {
+          // TODO: navigasi antar tab
+          if (index == 0) {
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const BerandaPage()));
+          } else if (index == 1) {
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const PesananPage()));
+          } else if (index == 2) {
+            // Tetap di halaman menu
+          } else if (index == 3) {
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ProfilePage()));
+          }
+        },
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Beranda'),
+          BottomNavigationBarItem(icon: Icon(Icons.receipt_long_outlined), label: 'Pesanan'),
+          BottomNavigationBarItem(icon: Icon(Icons.restaurant_menu_outlined), label: 'Menu'),
+          BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: 'Profil'),
+        ],
       ),
     );
   }
