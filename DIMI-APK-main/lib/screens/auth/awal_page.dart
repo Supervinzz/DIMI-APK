@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:flutter/material.dart'; //baruu
+import 'package:flutter/material.dart'; //baruuuuuuuuu
 import 'selamat_datang_page.dart'; // sesuaikan dengan path file kamu
 
 class AwalPage extends StatefulWidget {
